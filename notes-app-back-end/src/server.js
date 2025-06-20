@@ -1,13 +1,13 @@
-// console.log('Hallo kita akan membuat RESTful API Yuhuuuu');
-// import { server as _server } from '@hapi/hapi';
-const Hapi = require('@hapi/hapi');
-const routes = require('./routes');
+// server.js
+
+import { server as _server } from '@hapi/hapi';
+// Ubah ini:
+import routes from './routes.js'; // Tidak ada kurung kurawal, karena ini adalah default export
 
 const init = async () => {
     const server = _server({
         port: 5000,
         host: 'localhost',
-        // eslint-disable-next-line linebreak-style
     });
 
     server.route(routes);

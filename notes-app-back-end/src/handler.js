@@ -1,7 +1,8 @@
-import { nanoid } from "nanoid";
+// handler.js
 
-const { nanoid } = require("nanoid");
-const notes = require("./notes");
+// 1. Ubah 'require' menjadi 'import'
+import { nanoid } from "nanoid";
+import notes from "./notes.js"; // Penting: ini juga perlu diubah!
 
 const addNoteHandler = (request, h) => {
     const { title, tags, body } = request.payload;
@@ -40,7 +41,9 @@ const addNoteHandler = (request, h) => {
         message: "Catatan gagal ditambahkan",
     });
 
-    
+    response.code(500); // Tambahkan code 500 untuk kegagalan server
+    return response;
 };
 
-module.exports = { addNoteHandler };
+// 2. Ubah 'module.exports' menjadi 'export'
+export { addNoteHandler };
