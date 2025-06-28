@@ -7,7 +7,7 @@ const server = Hapi.server({
   host: 'localhost',
   routes: {
     cors: {
-      origin: ['*'], // Izinkan akses dari semua origin
+      origin: ['*'], // Izinkan akses dari semua originn
     },
   },
 });
