@@ -1,49 +1,50 @@
-// handler.js
-
-// 1. Ubah 'require' menjadi 'import'
-import { nanoid } from "nanoid";
-import notes from "./notes.js"; // Penting: ini juga perlu diubah!
+import { nanoid } from 'nanoid';
+import notes from './notes.js'; // Import default dari notes.js
 
 const addNoteHandler = (request, h) => {
-    const { title, tags, body } = request.payload;
-    const id = nanoid(16);
-    const createdAt = new Date().toISOString();
-    const updatedAt = createdAt;
+  const { title, tags, body } = request.payload;
+  const id = nanoid(16);
+  const createdAt = new Date().toISOString();
+  const updatedAt = createdAt;
 
-    // Masukan Nilai Ke Dalam Array
-    const newNote = {
-        title,
-        tags,
-        body,
-        id,
-        createdAt,
-        updatedAt,
-    };
+  const newNote = {
+    title,
+    tags,
+    body,
+    id,
+    createdAt,
+    updatedAt,
+  };
 
-    notes.push(newNote);
+  notes.push(newNote);
 
-    const isSuccess = notes.filter((note) => note.id === id).length > 0;
+  const isSuccess = notes.filter((note) => note.id === id).length > 0;
 
-    if (isSuccess) {
-        const response = h.response({
-            status: "success",
-            message: "Catatan berhasil ditambahkan",
-            data: {
-                noteId: id,
-            },
-        });
-        response.code(201);
-        return response;
-    }
-
+  if (isSuccess) {
     const response = h.response({
-        status: "fail",
-        message: "Catatan gagal ditambahkan",
+      status: 'success',
+      message: 'Catatan berhasil ditambahkan',
+      data: {
+        noteId: id,
+      },
     });
-
-    response.code(500); // Tambahkan code 500 untuk kegagalan server
+    response.code(201);
     return response;
+  }
+
+  const response = h.response({
+    status: 'fail',
+    message: 'Catatan gagal ditambahkan',
+  });
+  response.code(500);
+  return response;
 };
 
-// 2. Ubah 'module.exports' menjadi 'export'
-export { addNoteHandler };
+const getAllNotesHandler = () => ({
+  status: 'success',
+  data: {
+    notes,
+  },
+});
+
+export { addNoteHandler, getAllNotesHandler };

@@ -1,16 +1,17 @@
-// routes.js
-
-// 1. Ubah 'require' menjadi 'import'
-import { addNoteHandler } from './handler.js'; // Penting: Tambahkan '.js' di sini juga!
+// src/routes.js
+import { addNoteHandler, getAllNotesHandler } from './handler.js';
 
 const routes = [
-    {
-        method: 'POST',
-        path: '/notes',
-        // 2. Perbaiki handler: 'handler' langsung merujuk ke fungsi, bukan arrow function kosong
-        handler: addNoteHandler,
-    },
+  {
+    method: 'POST',
+    path: '/notes',
+    handler: addNoteHandler,
+  },
+  {
+    method: 'GET',
+    path: '/notes',
+    handler: getAllNotesHandler,
+  },
 ];
 
-// 3. Ubah 'module.exports' menjadi 'export default'
 export default routes;
